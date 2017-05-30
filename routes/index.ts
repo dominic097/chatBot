@@ -23,4 +23,9 @@ router.get('/chat', function (req: Request, res: Response, next: Function) {
         });
 });
 
+router.get('/login', function (req: Request, res: Response, next: Function) {
+    console.log(req.query)
+    res.sendFile('login_success.html', {root: __dirname });
+});
+
 module.exports = router;

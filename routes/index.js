@@ -19,4 +19,8 @@ router.get('/chat', function (req, res, next) {
         res.send(JSON.stringify(results));
     });
 });
+router.get('/login', function (req, res, next) {
+    console.log(req.query);
+    res.sendFile('login_success.html', { root: __dirname });
+});
 module.exports = router;
