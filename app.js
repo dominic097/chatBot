@@ -8,8 +8,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
 var routes = require('./routes/index');
 var app = express();
+var config_1 = require('./src/config');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -56,7 +59,12 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-app.listen(8082, function () {
-    console.log('Example app listening on port 3000!');
+MongoClient.connect(config_1.mongoDb.uri, function (err, db) {
+    assert.equal(null, err);
+    console.log(db);
+    console.log("Connected to server. Bootstrapping App");
+    app.listen(8082, function () {
+        console.log('Example app listening on port 3000!');
+    });
 });
 module.exports = app;
